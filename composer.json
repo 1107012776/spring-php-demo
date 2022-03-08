@@ -1,6 +1,6 @@
 {
     "name":"lys/spring-php-demo",
-    "description": "SpringPHP是一款基于Swoole的高性能框架",
+    "description": "SpringPHP框架Demo，SpringPHP是一款基于Swoole的高性能框架",
     "keywords": ["SpringPHP", "spring-php-demo", "PHP框架", "Swoole"],
     "license": "MIT",
     "authors": [
