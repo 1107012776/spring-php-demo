@@ -61,7 +61,9 @@ class Index extends WebSocketController
             if(empty($info)){
                 $user->renew()->insert([
                     'username' => $this->request->post('user_id'),
-                    'heart' => time()
+                    'heart' => time(),
+                    'created_at' => time(),
+                    'updated_at' => time(),
                 ]);
             }
         }
@@ -70,10 +72,13 @@ class Index extends WebSocketController
             $res = $user->where([
                 'username' => $this->request->post('user_id')
             ])->update([
-                'heart' => time()
+                'heart' => time(),
+                'updated_at' => time()
             ]);
             $data['user_list'] = [];
-            $list = $user->renew()->findAll();
+            $list = $user->renew()->where([
+                'updated_at' => ['gt', time()-1800]
+            ])->findAll();
             foreach ($list as &$val){
                 array_push($data['user_list'], [
                     'is_online' => $val['heart'] > time()-120,
