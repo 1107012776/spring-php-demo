@@ -27,13 +27,13 @@ class ManagerTimer extends Timer implements TimerInter
     {
         $model = new ServerManagerModel();
         $list = $model->findAll();
-        foreach ($list as $val){
-           $rpc = new WebSocketHealthyRpc(WebSocketClient::PROTOCOL_WS,$val['host'],$val['port']);
-           $heal = $rpc->healthy([], true);
-           var_dump($heal);
-           if(empty($heal)){
-               $model->where(['id' => $val['id']])->delete();
-           }
+        foreach ($list as $val) {
+            $rpc = new WebSocketHealthyRpc(WebSocketClient::PROTOCOL_WS, $val['host'], $val['port']);
+            $heal = $rpc->healthy([], true);
+            var_dump($heal);
+            if (empty($heal)) {
+                $model->where(['id' => $val['id']])->delete();
+            }
         }
     }
 

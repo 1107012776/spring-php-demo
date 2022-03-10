@@ -1,9 +1,12 @@
 <?php
+
 namespace App\Event;
 
-class WebSocketWorkerStartEvent{
-    public static function start(){
-        \Swoole\Timer::after(3000, function (){
+class WebSocketWorkerStartEvent
+{
+    public static function start()
+    {
+        \Swoole\Timer::after(3000, function () {
             $config = \SpringPHP\Core\ManagerServer::getInstance()->getServerConfig();
             $rpc = new \App\Rpc\ManagerRpc();
             $res = $rpc->register([

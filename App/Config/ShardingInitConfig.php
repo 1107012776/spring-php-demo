@@ -110,7 +110,7 @@ class ShardingInitConfig extends ShardingInitConfigInter
         $runtime_path = SpringContext::config('settings.runtime_path');
         $execTransactionSqlLogFilePath = SpringContext::config('local.shardingPdo.execTransactionSqlLogFilePath', $runtime_path . '/execXaSqlLogFilePath.log');
         $dir = dirname($execTransactionSqlLogFilePath);
-        if(!file_exists($dir)){
+        if (!file_exists($dir)) {
             mkdir($dir, 0777, true);
         }
         return $execTransactionSqlLogFilePath;

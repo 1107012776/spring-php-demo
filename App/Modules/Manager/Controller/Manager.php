@@ -20,8 +20,8 @@ class Manager extends SocketController
         ];
         $model = new ServerManagerModel();
         $list = $model->findAll();
-        foreach ($list as $val){
-            $rpc = new WebSocketPushRpc(WebSocketClient::PROTOCOL_WS,$val['host'],$val['port']);
+        foreach ($list as $val) {
+            $rpc = new WebSocketPushRpc(WebSocketClient::PROTOCOL_WS, $val['host'], $val['port']);
             $res = $rpc->push($data);
         }
         return ['code' => 200];
@@ -42,12 +42,12 @@ class Manager extends SocketController
             'host' => $this->request->post('host'),
             'port' => $this->request->post('port'),
         ])->find();
-        if(empty($info)){
+        if (empty($info)) {
             $res = $model->insert([
                 'host' => $this->request->post('host'),
                 'port' => $this->request->post('port'),
-                'uri' =>  $this->request->post('uri'),
-                'protocol' =>  $this->request->post('protocol'),
+                'uri' => $this->request->post('uri'),
+                'protocol' => $this->request->post('protocol'),
             ]);
         }
         return ['code' => 200];

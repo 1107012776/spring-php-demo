@@ -1,7 +1,6 @@
 <?php
 
 
-
 use SpringPHP\Server\Server;
 use SpringPHP\Core\SpringContext;
 use SpringPHP\Template\Render;
@@ -114,10 +113,10 @@ return [
             'event_worker_start' => function (\Swoole\Server $serv, $worker_id) {
                 \App\Event\WebSocketWorkerStartEvent::start();
             },
-            'event_open' => function(\Swoole\Server $ws, \Swoole\Http\Request $request){
-                \App\Event\WebSocketOpenEvent::start($ws,$request);
+            'event_open' => function (\Swoole\Server $ws, \Swoole\Http\Request $request) {
+                \App\Event\WebSocketOpenEvent::start($ws, $request);
             },
-            'event_close' => function(\Swoole\Server $ws, $fd){
+            'event_close' => function (\Swoole\Server $ws, $fd) {
                 \App\Event\WebSocketCloseEvent::start($ws, $fd);
             },
             'settings' => [
@@ -134,10 +133,10 @@ return [
             'event_worker_start' => function (\Swoole\Server $serv, $worker_id) {
                 \App\Event\WebSocketWorkerStartEvent::start();
             },
-            'event_open' => function(\Swoole\Server $ws, \Swoole\Http\Request $request){
-                \App\Event\WebSocketOpenEvent::start($ws,$request);
+            'event_open' => function (\Swoole\Server $ws, \Swoole\Http\Request $request) {
+                \App\Event\WebSocketOpenEvent::start($ws, $request);
             },
-            'event_close' => function(\Swoole\Server $ws, $fd){
+            'event_close' => function (\Swoole\Server $ws, $fd) {
                 \App\Event\WebSocketCloseEvent::start($ws, $fd);
             },
             'settings' => [
@@ -153,10 +152,10 @@ return [
             'event_worker_start' => function (\Swoole\Server $serv, $worker_id) {
                 \App\Event\WebSocketWorkerStartEvent::start();
             },
-            'event_open' => function(\Swoole\Server $ws, \Swoole\Http\Request $request){
-                \App\Event\WebSocketOpenEvent::start($ws,$request);
+            'event_open' => function (\Swoole\Server $ws, \Swoole\Http\Request $request) {
+                \App\Event\WebSocketOpenEvent::start($ws, $request);
             },
-            'event_close' => function(\Swoole\Server $ws, $fd){
+            'event_close' => function (\Swoole\Server $ws, $fd) {
                 \App\Event\WebSocketCloseEvent::start($ws, $fd);
             },
             'settings' => [

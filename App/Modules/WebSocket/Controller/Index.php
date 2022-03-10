@@ -49,7 +49,7 @@ class Index extends WebSocketController
             $userSession = new UserSessionModel();
             $config = ManagerServer::getInstance()->getServerConfig();
             $userSession->where([
-                'login_server' => ManagerServer::getInstance()->getUniquelyIdentifies().'_'.$config['host'].':'.$config['port'],
+                'login_server' => ManagerServer::getInstance()->getUniquelyIdentifies() . '_' . $config['host'] . ':' . $config['port'],
                 'fd' => $this->getFd()
             ])->update([
                 'username' => $this->request->post('user_id')
@@ -58,7 +58,7 @@ class Index extends WebSocketController
             $info = $user->where([
                 'username' => $this->request->post('user_id')
             ])->find();
-            if(empty($info)){
+            if (empty($info)) {
                 $user->renew()->insert([
                     'username' => $this->request->post('user_id'),
                     'heart' => time(),
@@ -67,7 +67,7 @@ class Index extends WebSocketController
                 ]);
             }
         }
-        if($this->request->post('code') == 4){
+        if ($this->request->post('code') == 4) {
             $user = new UserModel();
             $res = $user->where([
                 'username' => $this->request->post('user_id')
@@ -77,11 +77,11 @@ class Index extends WebSocketController
             ]);
             $data['user_list'] = [];
             $list = $user->renew()->where([
-                'updated_at' => ['gt', time()-1800]
+                'updated_at' => ['gt', time() - 1800]
             ])->findAll();
-            foreach ($list as &$val){
+            foreach ($list as &$val) {
                 array_push($data['user_list'], [
-                    'is_online' => $val['heart'] > time()-120,
+                    'is_online' => $val['heart'] > time() - 120,
                     'user_id' => $val['username']
                 ]);
             }
@@ -100,16 +100,16 @@ class Index extends WebSocketController
         $userSession = new UserSessionModel();
         $config = ManagerServer::getInstance()->getServerConfig();
         $list = $userSession->where([
-            'login_server' => ManagerServer::getInstance()->getUniquelyIdentifies().'_'.$config['host'].':'.$config['port'],
+            'login_server' => ManagerServer::getInstance()->getUniquelyIdentifies() . '_' . $config['host'] . ':' . $config['port'],
             'fd' => ['neq', '']
         ])->findAll();
-        if(!empty($list)){
+        if (!empty($list)) {
             $fds = ManagerServer::getInstance()->getMasterServer()->fds;
-            foreach ($list as $val){
-                if(isset($fds[$val['fd']])
+            foreach ($list as $val) {
+                if (isset($fds[$val['fd']])
                     && $this->request->post('user_id') != $val['username']
-                ){
-                   ManagerServer::getInstance()->getServer()->push(intval($val['fd']), json_encode($data, JSON_UNESCAPED_UNICODE));
+                ) {
+                    ManagerServer::getInstance()->getServer()->push(intval($val['fd']), json_encode($data, JSON_UNESCAPED_UNICODE));
                 }
             }
         }
